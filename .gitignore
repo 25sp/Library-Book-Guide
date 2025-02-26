@@ -36,3 +36,7 @@ build/
 build/*
 devel/
 devel/*
+
+# VS code directories
+.vscode/
+.vscode/* 
