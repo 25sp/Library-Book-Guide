@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# ROS directories
+build/
+build/*
+devel/
+devel/*
