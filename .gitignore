@@ -36,6 +36,10 @@ build/
 build/*
 devel/
 devel/*
+build_isolated/
+build_isolated/*
+devel_isolated/
+devel_isolated/*
 
 # VS code directories
 .vscode/
