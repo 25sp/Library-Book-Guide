@@ -5,13 +5,6 @@
 This project involves designing an car which can establish the map of the library and autonomous navigate
 itself to destinations. It works based on laser and Imu.
 
-## Structure
-
-All structural files are stored in the `structure` directory. The naming conventions for the parts and assembly files are as follows:
-
-- **Individual parts**: `<name>-<manufacture_method>_<date>.SLDPRT`
-- **Assembly file**: `picker_assembly_20241130.SLDASM`
-
 ## Prerequisite
 
 Several binary `ROS` packages are need to install. Please use the following command.
@@ -27,7 +20,7 @@ SLAM is based on RPLIDAR A3. When performing SLAM, ensure all related nodes are 
 - **Hector SLAM**: Follow these steps to configure and run Laser SLAM:
 
 ```bash
-cd ~/Autonomous-Ball-Pick-up-Car/workspace
+cd ~/Library-Book-Guide/workspace
 catkin_make
 source /opt/ros/melodic/setup.bash
 source devel/setup.bash
@@ -39,7 +32,7 @@ roslaunch rplidar_ros rplidar_a3.launch
 
 ```bash
 # Terminal 1
-cd ~/Autonomous-Ball-Pick-up-Car/workspace
+cd ~/Library-Book-Guide/workspace
 catkin_make
 source /opt/ros/melodic/setup.bash
 source devel/setup.bash
@@ -47,11 +40,11 @@ sudo chmod 666 /dev/laser
 roslaunch rplidar_ros rplidar_a3.launch
 
 # Terminal 2
-cd ~/Autonomous-Ball-Pick-up-Car/cartographer_workspace
+cd ~/Library-Book-Guide/cartographer_workspace
 ./carto_slam.sh
 
 # Terminal 3
-cd ~/Autonomous-Ball-Pick-up-Car/cartographer_workspace
+cd ~/Library-Book-Guide/cartographer_workspace
 ./map_save.sh
 
 # Once the map is successfully saved, quit all terminals.
