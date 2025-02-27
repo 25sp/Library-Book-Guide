@@ -2,33 +2,13 @@
 
 ## Introduction
 
-This project involves designing an car which can establish the map of the library and autonomous navigate
-itself to destinations. It works based on laser and Imu.
-
-## Prerequisite
-
-Several binary `ROS` packages are need to install. Please use the following command.
-
-```bash
-sudo apt-get install ros-melodic-navigation ros-melodic-serial ros-melodic-usb-cam
-```
+The goal of this project is to provide high-quality book navigation within the B300 space of the main library at Shanghai Jiao Tong University. This project utilizes laser SLAM to capture terrain information of the library and places a mobile phone on a cart to receive signals from Bluetooth base stations, aligning the data to ensure reliable information for navigation.
 
 ## Laser SLAM
 
-SLAM is based on RPLIDAR A3. When performing SLAM, ensure all related nodes are activated.
+SLAM is based on RPLIDAR A3. When the cart is performing SLAM, ensure all related nodes are activated.
 
-- **Hector SLAM**: Follow these steps to configure and run Laser SLAM:
-
-```bash
-cd ~/Library-Book-Guide/workspace
-catkin_make
-source /opt/ros/melodic/setup.bash
-source devel/setup.bash
-sudo chmod 666 /dev/laser
-roslaunch rplidar_ros rplidar_a3.launch
-```
-
-- **Cartographer**: For better performance, Cartographer is used. Three terminal windows are required:
+- **Cartographer** is applied for reliable performance. When using Cartographer, three terminal windows are required:
 
 ```bash
 # Terminal 1
@@ -49,59 +29,6 @@ cd ~/Library-Book-Guide/cartographer_workspace
 
 # Once the map is successfully saved, quit all terminals.
 ```
-
-## Active SLAM
-
-To improve mapping efficiency, a simple exploration algorithm is implemented. Follow these steps:
-
-```bash
-sudo chmod 666 /dev/arduino
-roslaunch explore explore.launch
-roslaunch map map_save.launch
-```
-
-## Odometry
-
-The package `rf2o_laser_odometry` is primarily used for odometry. Execute the following command to run it:
-
-```bash
-roslaunch rf2o_laser_odometry rf2o_laser_odometry.launch
-```
-
-## Inertial Measurement Unit (IMU)
-
-The package `imu_tools/imu_complimentary_filter` is primarily used for filtering raw IMU data. Execute the
-following command to launch the IMU node and filter the raw IMU data:
-
-```bash
-roslaunch imu imu_raw_data.launch
-roslaunch imu_complimentary_filter complimentary_filter.launch
-```
-
-To set up for IMU in cartographer, make sure the IMU is used in .lua file:
-
-```bash
-TRAJECTORY_BUILDER_2D.use_imu_data = true
-```
-
-## Localization
-
-### AMCL Localization
-
-- The AMCL algorithm is applied for robot localization. Use the following command:
-
-```bash
-roslaunch point_to_point_nav amcl_test.launch
-```
-
-### Lidar-Based Localization
-
-- Alternatively, a laser lidar-based localization method is provided. After mapping the target area, run the following command:
-
-```bash
-roslaunch point_to_point_nav point_to_point_nav.launch
-```
-
 
 ## Keyboard Control
 
@@ -127,3 +54,14 @@ roslaunch point_to_point_nav point_to_point_nav.launch
 
 # Use 2D Nav Goal to set the destination.
 ```
+
+## Trajectory Tracking
+
+To integrate with the phone, the position of the cart is recorded with a timestamp. Follow these steps:
+
+```bash
+roslaunch point_to_point_nav nav_with_position_record.launch
+```
+
+This will log the position data into a CSV file, allowing synchronization with other devices or systems.
+
