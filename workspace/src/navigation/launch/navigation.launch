@@ -23,5 +23,5 @@
   <include file="$(find navigation_driver)/launch/navigation.launch"/>
 
   <!-- launch rviz -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find point_to_point_nav)/rviz/path_planner.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find navigation)/rviz/path_planner.rviz" />
 </launch>
